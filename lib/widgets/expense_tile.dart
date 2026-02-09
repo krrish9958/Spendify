@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spendify/data/category_config.dart';
 
 class ExpenseTile extends StatelessWidget {
   final String title;
@@ -25,9 +26,13 @@ class ExpenseTile extends StatelessWidget {
         onTap: onTap,
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: const Color(0xFFEEE7F8),
-            child: Icon(icon, color: const Color(0xFF7E57C2)),
+            backgroundColor: CategoryConfig.getColor(title).withOpacity(0.15),
+            child: Icon(
+              CategoryConfig.getIcon(title),
+              color: CategoryConfig.getColor(title),
+            ),
           ),
+
           title: Text(title),
           subtitle: Text(subtitle),
           trailing: Text(

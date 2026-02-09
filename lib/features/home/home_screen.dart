@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spendify/features/history/history_screen.dart';
 import '../dashboard/dashboard_screen.dart';
 import '../expense/add_expense_screen.dart';
 import '../profile/profile_screen.dart';
+import 'package:spendify/features/history/history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = const [
     DashboardScreen(),
     AddExpenseScreen(),
-    ProfileScreen(),
+    HistoryScreen(),
   ];
 
   @override
@@ -45,11 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             activeIcon: Icon(Icons.add_box),
             label: "Add",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: "Profile",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
         ],
       ),
     );

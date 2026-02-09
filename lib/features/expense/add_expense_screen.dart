@@ -122,6 +122,8 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           ExpenseData.expenses.add(newExpense);
                         }
 
+                        ExpenseData.saveExpenses();
+
                         amountController.clear();
 
                         ScaffoldMessenger.of(context).showSnackBar(

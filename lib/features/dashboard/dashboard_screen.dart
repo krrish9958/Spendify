@@ -3,6 +3,8 @@ import 'package:spendify/features/expense/add_expense_screen.dart';
 import 'package:spendify/widgets/expense_tile.dart';
 import 'package:spendify/widgets/summary_card.dart';
 import '../../data/expense_data.dart';
+import '../../widgets/expense_pie_chart.dart';
+import 'package:spendify/widgets/chart_legend.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -48,6 +50,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     iconColor: Colors.green,
                   ),
                 ),
+              ],
+            ),
+
+            const SizedBox(height: 24),
+            const SizedBox(height: 24),
+
+            Text(
+              "Spending Breakdown",
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w600),
+            ),
+
+            const SizedBox(height: 12),
+
+            const ExpensePieChart(),
+            const SizedBox(height: 12),
+
+            ChartLegend(
+              data: ExpenseData.categoryTotals,
+              colors: const [
+                Color(0xFF7E57C2),
+                Color(0xFF9575CD),
+                Color(0xFFB39DDB),
+                Color(0xFFD1C4E9),
               ],
             ),
 
