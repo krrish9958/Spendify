@@ -7,6 +7,7 @@ class SummaryCard extends StatelessWidget {
   final Color iconColor;
 
   const SummaryCard({
+    super.key,
     required this.title,
     required this.amount,
     required this.icon,
@@ -17,26 +18,29 @@ class SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: iconColor),
-            const SizedBox(height: 8),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 12,
-                color: Color(0xFF777777),
+            // Icon container
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: iconColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
               ),
+              child: Icon(icon, color: iconColor, size: 22),
             ),
+
+            const SizedBox(height: 12),
+
+            Text(title, style: Theme.of(context).textTheme.bodyMedium),
+
             const SizedBox(height: 4),
+
             Text(
               amount,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ],
         ),

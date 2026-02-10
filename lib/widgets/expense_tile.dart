@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spendify/data/category_config.dart';
+import 'package:spendify/widgets/glass_card.dart';
 
 class ExpenseTile extends StatelessWidget {
   final String title;
@@ -20,7 +21,7 @@ class ExpenseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: onTap,
@@ -38,6 +39,8 @@ class ExpenseTile extends StatelessWidget {
           trailing: Text(
             amount,
             style: const TextStyle(
+              fontSize: 14,
+              letterSpacing: 0.2,
               color: Colors.red,
               fontWeight: FontWeight.w600,
             ),

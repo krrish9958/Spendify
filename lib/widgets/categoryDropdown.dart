@@ -20,17 +20,21 @@ class CategoryDropdown extends StatelessWidget {
       "Bills",
       "Others",
     ];
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: isDark
+                ? Colors.black.withOpacity(0.25)
+                : Colors.black.withOpacity(0.06),
             blurRadius: 12,
-            offset: const Offset(0, 6),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -38,11 +42,17 @@ class CategoryDropdown extends StatelessWidget {
         child: DropdownButton<String>(
           value: selectedCategory,
           isExpanded: true,
-          items: categories
-              .map((cat) => DropdownMenuItem(value: cat, child: Text(cat)))
-              .toList(),
+          dropdownColor: theme.cardColor,
+          icon: Icon(Icons.keyboard_arrow_down, color: theme.iconTheme.color),
+          style: TextStyle(
+            color: theme.textTheme.bodyLarge?.color,
+            fontSize: 16,
+          ),
+          items: categories.map((category) {
+            return DropdownMenuItem(value: category, child: Text(category));
+          }).toList(),
           onChanged: (value) {
-            onChanged(value!);
+            if (value != null) onChanged(value);
           },
         ),
       ),

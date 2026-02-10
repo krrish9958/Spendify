@@ -1,31 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:spendify/data/expense_data.dart';
-import 'core/theme/app_theme.dart';
-import 'features/auth/login_screen.dart';
-import 'data/expense_data.dart';
+import 'package:provider/provider.dart';
+import 'package:spendify/widgets/app_card.dart';
 
-// void main() {
-//   runApp(const ExpenseApp());
-// }
+import 'features/home/home_screen.dart';
+import 'core/theme/theme_provider.dart';
+import 'data/expense_data.dart';
+import 'core/theme/app_theme.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await ExpenseData.loadExpenses();
-  await ExpenseData.loadBudget();
+  await ThemeProvider.loadTheme();
 
-  runApp(const ExpenseApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class ExpenseApp extends StatelessWidget {
-  const ExpenseApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Spendify',
-      theme: AppTheme.lightTheme,
-      home: const LoginScreen(),
+      themeMode: themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF121212),
+        cardColor: const Color(0xFF1E1E1E),
+      ),
+
+      home: const HomeScreen(),
     );
   }
 }

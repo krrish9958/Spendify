@@ -4,7 +4,9 @@ import '../data/expense_data.dart';
 import '../data/category_config.dart';
 
 class ExpensePieChart extends StatelessWidget {
-  const ExpensePieChart({super.key});
+  final Map<String, double> data;
+
+  const ExpensePieChart({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {

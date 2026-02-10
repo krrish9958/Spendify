@@ -18,17 +18,22 @@ class FancyInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 18),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
+            color: isDark
+                ? Colors.black.withOpacity(0.25)
+                : Colors.black.withOpacity(0.06),
+            blurRadius: isDark ? 6 : 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -36,9 +41,11 @@ class FancyInputField extends StatelessWidget {
         controller: controller,
         obscureText: obscure,
         validator: validator,
+        style: TextStyle(color: theme.textTheme.bodyLarge?.color),
         decoration: InputDecoration(
           icon: Icon(icon, color: const Color(0xFF9575CD)),
           hintText: hint,
+          hintStyle: TextStyle(color: theme.hintColor),
           border: InputBorder.none,
         ),
       ),

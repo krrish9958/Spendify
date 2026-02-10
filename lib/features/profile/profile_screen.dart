@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:spendify/core/theme/theme_provider.dart';
 import '../../data/expense_data.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -23,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(hintText: "Enter budget"),
         ),
+
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -79,6 +82,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   icon: const Icon(Icons.edit),
                 ),
               ],
+            ),
+
+            const SizedBox(height: 20),
+
+            Consumer<ThemeProvider>(
+              builder: (context, themeProvider, _) {
+                return SwitchListTile(
+                  title: const Text("Dark Mode"),
+                  value: themeProvider.isDark,
+                  onChanged: (value) {
+                    themeProvider.toggleTheme(value);
+                  },
+                );
+              },
             ),
           ],
         ),

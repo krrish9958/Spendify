@@ -1,57 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
+    scaffoldBackgroundColor: const Color(0xFFF6F7FB),
 
-    colorScheme: ColorScheme.light(
-      primary: Color(0xFFB39DDB),
-      secondary: Color(0xFF9575CD),
-      background: Color(0xFFF8F6FC),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF6C63FF),
+      brightness: Brightness.light,
     ),
-
-    scaffoldBackgroundColor: const Color(0xFFF8F6FC),
 
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFFB39DDB),
-      foregroundColor: Colors.white,
+      backgroundColor: Color(0xFFF6F7FB),
       elevation: 0,
-    ),
-
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFF7E57C2),
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        minimumSize: const Size(double.infinity, 48),
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
       ),
+      iconTheme: IconThemeData(color: Colors.black),
     ),
 
-    cardTheme: const CardThemeData(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 2,
       shadowColor: Colors.black12,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     ),
 
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colors.white,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
+    textTheme: const TextTheme(
+      titleMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: Colors.black87,
       ),
-    ),
-
-    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-      headlineSmall: const TextStyle(
-        fontWeight: FontWeight.w700,
-        color: Color(0xFF2E2E2E),
-      ),
-      bodyMedium: const TextStyle(color: Color(0xFF555555)),
+      bodyMedium: TextStyle(fontSize: 14, color: Colors.black54),
     ),
   );
 }
