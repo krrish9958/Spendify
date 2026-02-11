@@ -16,52 +16,91 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
-    DashboardScreen(), // index 0
-    AddExpenseScreen(), // index 1
+    DashboardScreen(),
+    AddExpenseScreen(),
     HistoryScreen(),
-    ReportScreen(), // index 2
-    ProfileScreen(), // index 3
+    ReportScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex],
+      backgroundColor: const Color(0xFFF5F6FA),
+      body: Stack(
+        children: [
+          _screens[_currentIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedItemColor: const Color(0xFF7E57C2),
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: "Dashboard",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_rounded),
-            activeIcon: Icon(Icons.add_box),
-            label: "Add",
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            activeIcon: Icon(Icons.bar_chart),
-            label: "Report",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: "Profile",
+          // Floating bottom navigation
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: _buildFloatingNav(),
           ),
         ],
+      ),
+    );
+  }
+
+  // Floating nav container
+  Widget _buildFloatingNav() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _navItem(Icons.home, 0),
+          _navItem(Icons.add, 1, isCenter: true),
+          _navItem(Icons.history, 2),
+          _navItem(Icons.bar_chart, 3),
+          _navItem(Icons.person, 4),
+        ],
+      ),
+    );
+  }
+
+  // Individual nav item
+  Widget _navItem(IconData icon, int index, {bool isCenter = false}) {
+    final bool isActive = _currentIndex == index;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: isCenter
+            ? BoxDecoration(
+                color: isActive
+                    ? const Color(0xFF7E57C2)
+                    : Colors.grey.shade200,
+                shape: BoxShape.circle,
+              )
+            : null,
+
+        child: Icon(
+          icon,
+          size: isCenter ? 28 : 24,
+          color: isCenter
+              ? (isActive ? Colors.white : Colors.grey)
+              : isActive
+              ? const Color(0xFF7E57C2)
+              : Colors.grey,
+        ),
       ),
     );
   }

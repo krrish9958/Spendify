@@ -50,21 +50,44 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Add Expense"), centerTitle: true),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      body: SafeArea(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Amount
+              const SizedBox(height: 10),
+
+              // Amount label
+              const Text(
+                "Amount",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 8),
+
               FancyInputField(
-                hint: "Amount (₹)",
+                hint: "Enter amount",
                 icon: Icons.currency_rupee,
                 controller: amountController,
               ),
 
-              // Category
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
+
+              // Category label
+              const Text(
+                "Category",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 8),
+
               CategoryDropdown(
                 selectedCategory: selectedCategory,
                 onChanged: (value) {
@@ -74,23 +97,44 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                 },
               ),
 
-              // Date
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
+
+              // Date label
+              const Text(
+                "Date",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 8),
+
               const DatePickerField(),
 
-              // Note
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
+
+              // Note label
+              const Text(
+                "Note",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 8),
+
               const FancyInputField(
-                hint: "Note (optional)",
+                hint: "Optional note",
                 icon: Icons.note_outlined,
               ),
 
-              const SizedBox(height: 32),
+              const SizedBox(height: 30),
 
-              // Save Button
+              // Save button
               GradientButton(
                 text: "Save Expense",
-
                 onPressed: amountController.text.isEmpty
                     ? null
                     : () {

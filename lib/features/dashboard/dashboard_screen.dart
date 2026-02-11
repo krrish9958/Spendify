@@ -101,7 +101,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 14),
 
                 // Summary cards
                 Row(
@@ -132,7 +132,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 // Budget card
                 const BudgetProgressCard(),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 14),
 
                 // Pie chart title
                 Text(
@@ -145,26 +145,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                 const SizedBox(height: 12),
 
-                // Pie chart
-                SizedBox(
-                  height: 220,
-                  child: ExpensePieChart(data: filteredCategoryTotals),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 18,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+
+                        child: SizedBox(
+                          height: 145,
+                          child: ExpensePieChart(data: filteredCategoryTotals),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      ChartLegend(
+                        data: filteredCategoryTotals,
+                        colors: const [
+                          Color(0xFF7E57C2),
+                          Color(0xFF9575CD),
+                          Color(0xFFB39DDB),
+                          Color(0xFFD1C4E9),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
 
-                const SizedBox(height: 12),
-
-                // Chart legend
-                ChartLegend(
-                  data: filteredCategoryTotals,
-                  colors: const [
-                    Color(0xFF7E57C2),
-                    Color(0xFF9575CD),
-                    Color(0xFFB39DDB),
-                    Color(0xFFD1C4E9),
-                  ],
-                ),
-
-                const SizedBox(height: 24),
+                const SizedBox(height: 14),
 
                 // Section title
                 Text(
@@ -180,7 +198,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
                 // Expense list
                 Column(
-                  children: filteredExpenses.map((expense) {
+                  children: filteredExpenses.take(3).map((expense) {
                     final index = ExpenseData.expenses.indexOf(expense);
 
                     return Dismissible(

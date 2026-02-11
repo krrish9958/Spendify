@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spendify/data/category_config.dart';
-import 'package:spendify/widgets/glass_card.dart';
 
 class ExpenseTile extends StatelessWidget {
   final String title;
@@ -20,29 +18,69 @@ class ExpenseTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: onTap,
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: CategoryConfig.getColor(title).withOpacity(0.15),
-            child: Icon(
-              CategoryConfig.getIcon(title),
-              color: CategoryConfig.getColor(title),
-            ),
-          ),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-          title: Text(title),
-          subtitle: Text(subtitle),
-          trailing: Text(
-            amount,
-            style: const TextStyle(
-              fontSize: 14,
-              letterSpacing: 0.2,
-              color: Colors.red,
-              fontWeight: FontWeight.w600,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Material(
+        color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        elevation: 2,
+        shadowColor: Colors.black12,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                // Icon circle
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF7E57C2).withOpacity(0.12),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: const Color(0xFF7E57C2), size: 22),
+                ),
+
+                const SizedBox(width: 14),
+
+                // Title + subtitle
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitle,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Amount
+                Text(
+                  amount,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.redAccent,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
